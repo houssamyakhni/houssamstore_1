@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: "Premium E-commerce Experience",
 };
 
+import { Suspense } from "react";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={clsx(inter.className, "bg-white text-gray-900 antialiased min-h-screen flex flex-col")}>
         <Providers>
-          <Navbar />
+          <Suspense fallback={<div className="h-16 bg-white border-b border-gray-100" />}>
+            <Navbar />
+          </Suspense>
           <main className="flex-grow">
             {children}
           </main>

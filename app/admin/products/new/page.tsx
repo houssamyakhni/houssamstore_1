@@ -30,7 +30,9 @@ const onError = (err: any) => {
     alert("Upload failed");
 };
 
-export default function NewProductPage() {
+import { Suspense } from "react";
+
+function NewProductForm() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [images, setImages] = useState<{ color: string; image: string }[]>([]);
@@ -310,5 +312,13 @@ export default function NewProductPage() {
                 </form>
             </div>
         </div>
+    );
+}
+
+export default function NewProductPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>}>
+            <NewProductForm />
+        </Suspense>
     );
 }

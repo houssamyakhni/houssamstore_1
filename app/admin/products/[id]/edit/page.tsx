@@ -30,8 +30,9 @@ const onError = (err: any) => {
     alert("Upload failed");
 };
 
-export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = use(params);
+import { Suspense } from "react";
+
+function EditProductForm({ id }: { id: string }) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [fetching, setFetching] = useState(true);
@@ -227,7 +228,6 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                                             <option value="clothing">Clothing</option>
                                             <option value="accessories">Accessories</option>
                                             <option value="home">Home</option>
-                                            {/* Add more categories if dynamic in future */}
                                             <option value="sports">Sports</option>
                                             <option value="beauty">Beauty</option>
                                             <option value="fashion">Fashion</option>
@@ -374,5 +374,14 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                 </form>
             </div>
         </div>
+    );
+}
+
+export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = use(params);
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>}>
+            <EditProductForm id={id} />
+        </Suspense>
     );
 }

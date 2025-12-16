@@ -1,0 +1,34 @@
+
+> houssam-store@0.1.0 build
+> next build
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\lenovo\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\package-lock.json
+
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Environments: .env
+
+ ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 12.9s
+   Running TypeScript ...
+   Collecting page data using 7 workers ...
+   Generating static pages using 7 workers (0/24) ...
+ ⨯ useSearchParams() should be wrapped in a suspense boundary at page "/admin/products/new". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+    at S (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\.next\server\chunks\ssr\b21fa_next_5880da41._.js:2:2111)
+    at p (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\.next\server\chunks\ssr\b21fa_next_5880da41._.js:4:4841)
+    at k (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\.next\server\chunks\ssr\[root-of-the-server]__b9c79aec._.js:177:4817)
+    at ar (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84366)
+    at aa (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86185)
+    at aa (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:104714)
+    at as (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:107952)
+    at ao (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:105374)
+    at ap (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:112881)
+    at al (C:\Users\lenovo\.gemini\antigravity\scratch\houssam-store\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109984)
+Error occurred prerendering page "/admin/products/new". Read more: https://nextjs.org/docs/messages/prerender-error
+Export encountered an error on /admin/products/new/page: /admin/products/new, exiting the build.
+ ⨯ Next.js build worker exited with code: 1 and signal: null
