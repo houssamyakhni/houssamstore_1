@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { FiHome, FiBox, FiUsers, FiShoppingBag, FiSettings } from "react-icons/fi";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const router = useRouter();
+    const { data: session, status } = useSession();
 
     const links = [
         { name: "Dashboard", href: "/admin", icon: FiHome },
@@ -14,6 +18,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { name: "Users", href: "/admin/users", icon: FiUsers },
         { name: "Orders", href: "/admin/orders", icon: FiShoppingBag },
     ];
+
+    useEffect(() => {
+        if (status === "loading") return;
+
+        if (!session || (session.user as any).role !== "admin") {
+            router.replace("/");
+        }
+    }, [session, status, router]);
+
+    if (status === "loading") {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+            </div>
+        );
+    }
+
+    if (!session || (session.user as any).role !== "admin") {
+        return null; // Will redirect via useEffect
+    }
 
     return (
         <div className="flex min-h-[calc(100vh-64px)] bg-gray-50">
