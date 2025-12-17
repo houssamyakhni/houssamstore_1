@@ -39,7 +39,12 @@ export const authOptions: NextAuthOptions = {
                                 address: { country: "Admin", city: "HQ", street: "Main" }
                             });
                         }
-                        return { id: adminUser._id.toString(), name: adminUser.name, email: adminUser.email, role: "admin" };
+                        return {
+                            id: adminUser._id.toString(),
+                            name: adminUser.name,
+                            email: adminUser.email,
+                            role: "admin"
+                        };
                     } else {
                         console.log("Invalid admin password");
                         throw new Error("Invalid admin password");
@@ -65,7 +70,12 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("Invalid password");
                 }
 
-                return { id: user._id.toString(), name: user.name, email: user.email, role: user.role };
+                return {
+                    id: user._id.toString(),
+                    name: user.name,
+                    email: user.email,
+                    role: user.role
+                };
             },
         }),
     ],
