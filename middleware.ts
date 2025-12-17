@@ -10,6 +10,7 @@ export async function middleware(req: any) {
     if (pathname.startsWith("/admin")) {
         // Not logged in -> Login
         if (!token) {
+            console.log("Middleware: No token found. Redirecting to login.");
             const url = new URL("/login", req.url);
             url.searchParams.set("callbackUrl", pathname);
             return NextResponse.redirect(url);
@@ -17,8 +18,11 @@ export async function middleware(req: any) {
 
         // Logged in but not admin -> Home
         if (token.role !== "admin") {
+            console.log("Middleware: Token found but role is not admin:", token.role);
             return NextResponse.redirect(new URL("/", req.url));
         }
+
+        console.log("Middleware: Admin access granted.");
     }
 }
 

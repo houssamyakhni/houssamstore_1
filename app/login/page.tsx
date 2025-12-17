@@ -30,12 +30,14 @@ export default function LoginPage() {
             setLoading(false);
         } else {
             // Check if admin to redirect to /admin (optional client-side, but good for UX)
+            // Check if admin to redirect to /admin
             if (email === "HoussamStore@gmail.com") {
-                router.push("/admin");
+                // Force full reload to ensure cookies are set before hitting protected admin routes
+                window.location.href = "/admin";
             } else {
                 router.replace("/");
+                router.refresh();
             }
-            router.refresh();
         }
     }
 
