@@ -17,15 +17,19 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("Invalid credentials");
                 }
 
+                console.log("Authorize called with:", credentials?.email);
+
                 await connectDB();
 
                 // 1. Admin Check (HARDCODED STRICT RULE)
                 if (credentials.email === "HoussamStore@gmail.com") {
                     if (credentials.password === "Amal1234") {
+                        console.log("Admin credentials match");
                         // Return admin user object. Using a dummy ID or finding/creating admin in DB.
                         // Ideally we upsert the admin to ensure they exist in DB for consistency.
                         let adminUser = await User.findOne({ email: "HoussamStore@gmail.com" });
                         if (!adminUser) {
+                            console.log("Creating admin user in DB...");
                             const hashedPassword = await bcrypt.hash("Amal1234", 10);
                             adminUser = await User.create({
                                 name: "Houssam Admin",
@@ -37,6 +41,7 @@ export const authOptions: NextAuthOptions = {
                         }
                         return { id: adminUser._id.toString(), name: adminUser.name, email: adminUser.email, role: "admin" };
                     } else {
+                        console.log("Invalid admin password");
                         throw new Error("Invalid admin password");
                     }
                 }
@@ -44,6 +49,7 @@ export const authOptions: NextAuthOptions = {
                 // 2. Normal User Check
                 const user = await User.findOne({ email: credentials.email });
                 if (!user) {
+                    console.log("User not found");
                     throw new Error("User not found");
                 }
 
@@ -55,6 +61,7 @@ export const authOptions: NextAuthOptions = {
 
                 const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
                 if (!isPasswordCorrect) {
+                    console.log("Invalid password");
                     throw new Error("Invalid password");
                 }
 
