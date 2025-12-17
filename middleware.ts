@@ -6,28 +6,17 @@ export async function middleware(req: any) {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const { pathname } = req.nextUrl;
 
-    // Admin Protection
-    if (pathname.startsWith("/admin")) {
-        // Not logged in -> Login
-        if (!token) {
-            console.log("Middleware: No token found. Redirecting to login.");
-            const url = new URL("/login", req.url);
-            url.searchParams.set("callbackUrl", pathname);
-            return NextResponse.redirect(url);
-        }
-
-        // Logged in but not admin -> Home
-        // TEMPORARY: Relaxing middleware check to rely on Client-Side protection (AdminLayout)
-        // This stops the redirect loop if Middleware fails to see the role.
-        /*
-        if (token.role !== "admin") {
-            console.log("Middleware: Token found but role is not admin:", token.role);
-            return NextResponse.redirect(new URL("/", req.url));
-        }
-        */
-
-        console.log("Middleware: Admin access granted.");
-    }
+    // Admin Protection - DISABLED
+    // if (pathname.startsWith("/admin")) {
+    //     // Not logged in -> Login
+    //     if (!token) {
+    //         console.log("Middleware: No token found. Redirecting to login.");
+    //         const url = new URL("/login", req.url);
+    //         url.searchParams.set("callbackUrl", pathname);
+    //         return NextResponse.redirect(url);
+    //     }
+    //     console.log("Middleware: Admin access granted (protection disabled).");
+    // }
 }
 
 export const config = {
